@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<title>Feliz Aniversario Meu Amor</title>
+
+<style>
+body {
+    margin: 0;
+    background: radial-gradient(circle at top, #1a0000, #000);
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    color: #fff;
+}
+
+/* BOTÃO */
+#abrirBtn {
+    margin-top: 200px;
+    padding: 15px 30px;
+    font-size: 20px;
+    background: black;
+    border: 2px solid #ff1a1a;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 15px #ff1a1a;
+}
+
+/* CARTA */
+.carta {
+    display: none;
+    background: #0d0d0d;
+    width: 360px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 15px;
+    border: 2px solid #ff1a1a;
+    box-shadow: 0 0 25px #ff1a1a;
+}
+
+/* TÍTULO */
+h2 {
+    color: #ff1a1a;
+    text-shadow: 0 0 10px red;
+}
+
+/* TEXTO */
+#texto {
+    white-space: pre-line;
+    border-right: 2px solid #ff4d4d;
+    display: inline-block;
+    text-align: left;
+    animation: piscar 1s infinite;
+}
+
+@keyframes piscar {
+    50% { border-color: transparent; }
+}
+
+/* XP BAR */
+.xp-container {
+    width: 100%;
+    background: #222;
+    border-radius: 10px;
+    margin-top: 20px;
+    border: 1px solid #ff1a1a;
+}
+
+.xp-bar {
+    width: 0%;
+    height: 20px;
+    background: linear-gradient(90deg, #ff4d4d, #ff9900);
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ff6600;
+}
+
+/* LEVEL UP */
+.levelup {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    color: #ff9900;
+    text-shadow: 0 0 20px #ff6600;
+    opacity: 0;
+}
+
+/* FOTO */
+img {
+    width: 200px;
+    border-radius: 10px;
+    margin-top: 20px;
+    border: 2px solid #ff1a1a;
+}
+</style>
+
+</head>
+
+<body>
+
+<button id="abrirBtn">▶ START</button>
+
+<div class="carta" id="carta">
+
+<h2>🔥 Feliz Aniversario Meu Amor 🔥</h2>
+
+<p id="texto"></p>
+
+<!-- XP -->
+<div class="xp-container">
+    <div class="xp-bar" id="xpBar"></div>
+</div>
+
+<div class="levelup" id="levelup">LEVEL UP! 🔥</div>
+
+<img src="foto.jpeg">
+
+<br><br>
+
+<audio id="musica" controls loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
+<script>
+const mensagem = `PLAYER: MEU AMOR ❤️
+
+LEVEL UP!
+
+Hoje é o seu dia!
+
+Você é meu duo favorito,
+meu player número 1,
+e a melhor parte da minha vida.
+
+Espero que esse novo nível venha cheio de:
+- felicidade
+- conquistas
+- vitórias
+- momentos incríveis
+
+Sempre comigo 💖
+
+Feliz aniversário!
+Te amo ❤️`;
+
+let i = 0;
+
+function escreverTexto() {
+    if (i < mensagem.length) {
+        document.getElementById("texto").innerHTML += mensagem.charAt(i);
+        i++;
+        setTimeout(escreverTexto, 35);
+    }
+}
+
+/* XP animação */
+function encherXP() {
+    let barra = document.getElementById("xpBar");
+    let width = 0;
+
+    let intervalo = setInterval(() => {
+        if (width >= 100) {
+            clearInterval(intervalo);
+            mostrarLevelUp();
+        } else {
+            width++;
+            barra.style.width = width + "%";
+        }
+    }, 20);
+}
+
+/* LEVEL UP aparece */
+function mostrarLevelUp() {
+    let lvl = document.getElementById("levelup");
+    lvl.style.opacity = 1;
+
+    setTimeout(() => {
+        lvl.style.opacity = 0;
+    }, 2000);
+}
+
+function abrirCarta() {
+    document.getElementById("abrirBtn").style.display = "none";
+    document.getElementById("carta").style.display = "block";
+
+    document.getElementById("musica").play();
+    escreverTexto();
+    encherXP();
+}
+
+document.getElementById("abrirBtn").addEventListener("click", abrirCarta);
+</script>
+
+</body>
+
+</html>
